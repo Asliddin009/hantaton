@@ -9,7 +9,9 @@ class RegisterScreen extends StatelessWidget {
   RegisterScreen({Key? key}) : super(key: key);
 
   final controllerLogin = TextEditingController();
-  final controllerEmail = TextEditingController();
+  final controllerName = TextEditingController();
+  final controllerSurname = TextEditingController();
+  final controllerDescription = TextEditingController();
   final controllerPassword = TextEditingController();
   final controllerPassword2 = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey();
@@ -17,7 +19,6 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("RegisterScreen")),
       body: Form(
         key: formKey,
         child: Center(
@@ -26,20 +27,30 @@ class RegisterScreen extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                AppTextField(controller: controllerLogin, labelText: "логин"),
+                AppTextField(controller: controllerName, labelText: "имя"),
                 const SizedBox(height: 16),
-                AppTextField(controller: controllerEmail, labelText: "email"),
+                AppTextField(controller: controllerSurname, labelText: "фамилия"),
                 const SizedBox(height: 16),
+                AppTextField(
+                  obscureText: true,
+                  controller: controllerDescription,
+                  labelText: "описание",
+                ),
+                const SizedBox(height: 16),
+                AppTextField(
+                  obscureText: true,
+                  controller: controllerLogin,
+                  labelText: "логин",
+                ),
                 AppTextField(
                   obscureText: true,
                   controller: controllerPassword,
                   labelText: "пароль",
                 ),
-                const SizedBox(height: 16),
                 AppTextField(
                   obscureText: true,
                   controller: controllerPassword2,
-                  labelText: "повторите пароль",
+                  labelText: "подтвердите пароль",
                 ),
                 const SizedBox(height: 16),
                 AppTextButton(

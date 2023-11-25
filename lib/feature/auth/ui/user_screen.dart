@@ -22,7 +22,7 @@ class UserScreen extends StatelessWidget {
       final userEntity = state.whenOrNull(
         authorized: (userEntity) => userEntity,
       );
-      /*if(userEntity==null||userEntity.email.isEmpty){
+      if(userEntity==null||userEntity.email.isEmpty){
         return Scaffold(
           body: Center(child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -33,9 +33,8 @@ class UserScreen extends StatelessWidget {
             }, text: "Авторизоваться")
           ],),),
         );
-      }*/
+      }
       return Scaffold(
-
         body: SingleChildScrollView(
           child: Column(
             children: [
