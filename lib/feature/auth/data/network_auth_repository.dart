@@ -1,6 +1,7 @@
 import 'package:hantaton_app/app/domain/app_api.dart';
 import 'package:hantaton_app/feature/auth/data/dto/user_dto.dart';
 import 'package:hantaton_app/feature/auth/domain/auth_repository.dart';
+import 'package:hantaton_app/feature/auth/domain/entities/token_entity/token_entity.dart';
 import 'package:hantaton_app/feature/auth/domain/entities/user_entity/user_entity.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
@@ -15,7 +16,7 @@ class NetworkAuthRepository implements AuthRepository {
   Future<UserEntity> getProfile() async {
     try {
       final response = await api.getProfile();
-      return UserDto.fromJson(response.data["data"]).toEntity();
+      return UserEntity.fromJson(response.data);
     } catch (_) {
       rethrow;
     }
@@ -34,21 +35,21 @@ class NetworkAuthRepository implements AuthRepository {
   }
 
   @override
-  Future<UserEntity> refreshToken({String? refreshToken}) async {
+  Future<TokenEntity> refreshToken({String? refreshToken}) async {
     try {
       final response = await api.refreshToken(refreshToken: refreshToken);
-      return UserDto.fromJson(response.data["data"]).toEntity();
+      return TokenEntity.fromJson(response.data);
     } catch (_) {
       rethrow;
     }
   }
 
   @override
-  Future<UserEntity> signIn(
-      {required String password, required String username}) async {
+  Future<TokenEntity> signIn(
+      {required String password, required String email}) async {
     try {
-      final response = await api.signIn(password: password, username: username);
-      return UserDto.fromJson(response.data["data"]).toEntity();
+      final response = await api.signIn(password: password, email: email);
+      return TokenEntity.fromJson(response.data);
     } catch (_) {
       rethrow;
     }
@@ -56,14 +57,27 @@ class NetworkAuthRepository implements AuthRepository {
 
   @override
   Future<UserEntity> signUp({
-    required String password,
     required String username,
+    required String password,
+    required String rePassword,
     required String email,
+    required String description,
+    required String firstName,
+    required String lastName,
+
   }) async {
     try {
+      final data=<String,dynamic>{
+        "username": username,
+        "first_name": firstName,
+        "last_name": lastName,
+        "email": email,
+        "password": password,
+        "re_password": rePassword
+      };
       final response = await api.signUp(
-          password: password, username: username, email: email);
-      return UserDto.fromJson(response.data["data"]).toEntity();
+          data:data);
+      return UserEntity.fromJson(response.data);
     } catch (_) {
       rethrow;
     }

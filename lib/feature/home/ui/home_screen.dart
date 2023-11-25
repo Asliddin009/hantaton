@@ -1,5 +1,7 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
+import 'package:hantaton_app/app/di/init_di.dart';
+import 'package:hantaton_app/feature/auth/domain/auth_state/auth_cubit.dart';
 
 import '../../../app/domain/notification/notification_controller.dart';
 
@@ -44,11 +46,21 @@ class _HomeScreenState extends State<HomeScreen> {
             width: double.infinity,
             height: double.infinity,
             child: Center(
-              child: TextButton(
-                onPressed: () async{
-                  NotificationController.scheduleNewNotification(null);
-                  },
-                child: const Text("Поставить уведомление "),
+              child: Column(
+                children: [
+                  TextButton(
+                    onPressed: () async{
+                      NotificationController.scheduleNewNotification(null);
+                      },
+                    child: const Text("Поставить уведомление "),
+                  ),
+                  TextButton(
+                    onPressed: () async{
+                      locator.get<AuthCubit>().refreshToken();
+                    },
+                    child: const Text("Выйти"),
+                  ),
+                ],
               ),
             ))
       ],

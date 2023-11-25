@@ -24,7 +24,7 @@ class DioAppApi implements AppApi {
   @override
   Future<Response> getProfile() {
     try {
-      return dio.get("/auth/user");
+      return dio.get("auth/users/me/");
     } catch (_) {
       rethrow;
     }
@@ -42,18 +42,17 @@ class DioAppApi implements AppApi {
   @override
   Future<Response> refreshToken({String? refreshToken}) {
     try {
-      return dio.post("/auth/token/$refreshToken");
+      return dio.post("/auth/jwt/refresh", data: {'refresh': refreshToken});
     } catch (_) {
       rethrow;
     }
   }
 
   @override
-  Future<Response> signIn(
-      {required String password, required String username}) {
+  Future<Response> signIn({required String password, required String email}) {
     try {
-      return dio.post("/auth/token",
-          data: {"username": username, "password": password});
+      return dio.post("auth/jwt/create/",
+          data: {"email": email, "password": password});
     } catch (_) {
       rethrow;
     }
@@ -61,15 +60,9 @@ class DioAppApi implements AppApi {
 
   @override
   Future<Response> signUp(
-      {required String password,
-      required String username,
-      required String email}) {
+      {required Map<String,dynamic> data}) {
     try {
-      return dio.put("/auth/token", data: {
-        "username": username,
-        "password": password,
-        "email": email,
-      });
+      return dio.post("/auth/users/", data: data);
     } catch (_) {
       rethrow;
     }

@@ -8,9 +8,12 @@ part 'user_entity.g.dart';
 @freezed
 class UserEntity with _$UserEntity {
   const factory UserEntity({
-    required String email,
     required String username,
-    required String id,
+     String? description,
+     String? photo,
+    required int id,
+    String? first_name,
+    String? last_name,
     String? accessToken,
     String? refreshToken,
     @JsonKey(ignore: true) AsyncSnapshot? userState,

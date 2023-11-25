@@ -22,7 +22,7 @@ class UserScreen extends StatelessWidget {
       final userEntity = state.whenOrNull(
         authorized: (userEntity) => userEntity,
       );
-      if(userEntity==null||userEntity.email.isEmpty){
+      if(userEntity==null){
         return Scaffold(
           body: Center(child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -48,7 +48,7 @@ class UserScreen extends StatelessWidget {
                         color: Colors.white,
                           child: SvgPicture.asset('assets/account.svg')
                       ),
-                      CircleAvatar(
+                      const CircleAvatar(
                           backgroundColor: Colors.transparent,
                           radius: 68,
                           backgroundImage: NetworkImage('https://i.stack.imgur.com/UHa1c.png'),

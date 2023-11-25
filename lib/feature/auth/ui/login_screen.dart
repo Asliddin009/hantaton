@@ -1,10 +1,9 @@
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:hantaton_app/app/di/init_di.dart';
+
+import 'package:flutter_svg/svg.dart';
 import 'package:hantaton_app/feature/auth/domain/auth_state/auth_cubit.dart';
 import 'package:hantaton_app/feature/auth/ui/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hantaton_app/feature/auth/ui/user_screen.dart';
 
 import '../../../app/ui/components/app_text_button.dart';
 import '../../../app/ui/components/app_text_field.dart';
@@ -88,15 +87,15 @@ class LoginScreen extends StatelessWidget {
             ),
           ),
           Container(
-            padding: EdgeInsets.only(top: 20),
-            decoration: BoxDecoration(
+            padding: const EdgeInsets.only(top: 20),
+            decoration: const BoxDecoration(
                 color: Color.fromRGBO(69,90,100, 1),
                 borderRadius: BorderRadius.only(topRight:  Radius.circular(40))
             ),
             width: double.infinity,
             child: Column(
               children: [
-                Text(
+                const Text(
                     "Вы новый пользователь? \n Скорее регистрируйтесь",
                   style: TextStyle(
                     fontSize: 20,
@@ -108,7 +107,7 @@ class LoginScreen extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterScreen()));
                     },
-                    child: Text(
+                    child: const Text(
                       "РЕГИСТРАЦИЯ",
                       style: TextStyle(
                         fontSize: 20,
@@ -125,7 +124,7 @@ class LoginScreen extends StatelessWidget {
   }
 
   void _onTapToSignIn(AuthCubit authCubit) => authCubit.signIn(
-        username: controllerLogin.text,
+        email: controllerLogin.text,
         password: controllerPassword.text,
       );
 }

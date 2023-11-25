@@ -198,7 +198,7 @@ class NotificationController {
               isDangerousOption: true)
         ],
         schedule: NotificationCalendar.fromDate(
-            date: dateTime??DateTime.now().add(const Duration(seconds: 1))));
+            date: dateTime??DateTime.now().add( const Duration(seconds: 1))));
   }
 
   static Future<void> resetBadgeCounter() async {
