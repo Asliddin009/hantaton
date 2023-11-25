@@ -1,7 +1,9 @@
+import 'package:hantaton_app/app/di/init_di.dart';
 import 'package:hantaton_app/feature/auth/domain/auth_state/auth_cubit.dart';
 import 'package:hantaton_app/feature/auth/ui/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hantaton_app/feature/auth/ui/user_screen.dart';
 
 import '../../../app/ui/components/app_text_button.dart';
 import '../../../app/ui/components/app_text_field.dart';

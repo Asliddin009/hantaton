@@ -48,7 +48,7 @@ class _MainScreenState extends State<MainScreen> {
       case 2:
         return const ChatScreen();
       case 3:
-        return const UserScreen();
+        return UserScreen();
       default:
         return const HomeScreen();
     }
