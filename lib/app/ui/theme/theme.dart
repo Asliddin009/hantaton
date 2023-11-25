@@ -4,17 +4,17 @@ ThemeData theme = ThemeData(
   textTheme: const TextTheme(
     displayLarge: TextStyle(
       fontSize: 30,
-      color: Colors.white,
+        fontFamily: 'Montserrat-Medium.ttf'
+
     ),
     displayMedium: TextStyle(
       fontSize: 20,
-      letterSpacing: 5,
-      color: Colors.white,
+      fontFamily: 'Montserrat-Medium.ttf'
     ),
     displaySmall: TextStyle(
       fontSize: 14,
-      letterSpacing: 5,
-      color: Colors.white,
+        fontFamily: 'Montserrat-Medium.ttf'
+
     ),
   ),
   useMaterial3: true,

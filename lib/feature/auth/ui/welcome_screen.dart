@@ -21,10 +21,21 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   PageController pageController = PageController();
   bool flagFinishWelcomeScreen = false;
 
-  List listTitle = ["Все мероприятия вашего города в одном месте!", "С нами планировать свой досуг проще!", "Создавайте свои собственные мероприятия!", "Создавайте!"];
-  List listSubTitle = ["Расписание, анонсы и описание мероприятий структурированы и собраны воедино специально для вас.", "Личный кабинет и система уведомлений помогут вам сохранить понравившиеся мероприятия и не забыть про них позже.", "Организуйте мероприятия сами, собирайте друзей и находите новые компании по интересам.", "Организуйте мероприятия сами, собирайте друзей и находите новые компании по интересам."];
-  String title = "";
-  String subTitle = "";
+  List listTitle = [
+    "Все мероприятия вашего города в одном месте!",
+    "С нами планировать свой досуг проще!",
+    "Создавайте свои собственные мероприятия!",
+    "Создавайте!"
+  ];
+  List listSubTitle = [
+    "Расписание, анонсы и описание мероприятий структурированы и собраны воедино специально для вас.",
+    "Личный кабинет и система уведомлений помогут вам сохранить понравившиеся мероприятия и не забыть про них позже.",
+    "Организуйте мероприятия сами, собирайте друзей и находите новые компании по интересам.",
+    "Организуйте мероприятия сами, собирайте друзей и находите новые компании по интересам."
+  ];
+  String title = "Все мероприятия вашего города в одном месте!";
+  String subTitle =
+      "Расписание, анонсы и описание мероприятий структурированы и собраны воедино специально для вас.";
 
   @override
   void initState() {
@@ -44,96 +55,105 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   Widget build(BuildContext context) {
     return Scaffold(
         //backgroundColor: ConstColor.BACKGROUND_COLOR,
-        body: Column(
-      children: [
-        Expanded(
-          flex: 4,
-          child: PageView(
-            controller: pageController,
-            onPageChanged: (index) {
-              setState(() {
-                flagFinishWelcomeScreen = (index == 3);
-                title = listTitle[index];
-                subTitle = listSubTitle[index];
-              });
-            },
-            children: const [
-              Page1(),
-              Page2(),
-              Page3(),
-              Page4(),
-            ],
-          ),
-        ),
-        // Панель Навигации снизу
-        Expanded(
-          flex: 3,
+        body: Container(
+          padding: const EdgeInsets.all(30),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SmoothPageIndicator(
-                controller: pageController,
-                count: 4,
-                effect: const WormEffect(
-                  activeDotColor: Colors.black26,
-                  type: WormType.thin,
+      children: [
+          SizedBox(
+            height: 50,
+              width: double.infinity,
+              child: IconButton(onPressed: (){
+                locator.get<AuthCubit>().finishWelcomeScreen();
+              }, icon: const Icon(Icons.close,size: 33,),alignment: Alignment.bottomRight,)),
+          Expanded(
+            flex: 4,
+            child: PageView(
+              controller: pageController,
+              onPageChanged: (index) {
+                setState(() {
+                  flagFinishWelcomeScreen = (index == 3);
+                  title = listTitle[index];
+                  subTitle = listSubTitle[index];
+                });
+              },
+              children: const [
+                Page1(),
+                Page2(),
+                Page3(),
+                Page4(),
+              ],
+            ),
+          ),
+          // Панель Навигации снизу
+          Expanded(
+            flex: 3,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SmoothPageIndicator(
+                  controller: pageController,
+                  count: 4,
+                  effect: const WormEffect(
+                    activeDotColor: Colors.black26,
+                    type: WormType.thin,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 20,),
-              Text(
-                textAlign: TextAlign.center,
-                title,
-                style: Theme.of(context).textTheme.displayMedium
-              ),
-              const SizedBox(height: 35,),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.9,
-                child: Text(
+                const SizedBox(
+                  height: 20,
+                ),
+                Text(
+                    textAlign: TextAlign.center,
+                    title,
+                    style: Theme.of(context).textTheme.displayMedium),
+                const SizedBox(
+                  height: 35,
+                ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  child: Text(
                     textAlign: TextAlign.center,
                     subTitle,
-                  style: Theme.of(context).textTheme.displaySmall,
-                ),
-              )
-            ],
+                    style: Theme.of(context).textTheme.displaySmall,
+                  ),
+                )
+              ],
+            ),
           ),
-        ),
-        !flagFinishWelcomeScreen ?
-        Container(
-          height: 60,
-          padding: const EdgeInsets.all(5),
-          margin: const EdgeInsets.only(bottom: 15),
-          width: MediaQuery.of(context).size.width * 0.9,
-          child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.grey,
-                  foregroundColor: Colors.black,
-                  elevation: 1,
-              ),
-              onPressed: () {
-                locator.get<AuthCubit>().finishWelcomeScreen();
-              },
-              child: const Text("Пропустить")),
-        )
-        :
-        Container(
-          height: 60,
-          padding: const EdgeInsets.all(5),
-          margin: const EdgeInsets.only(bottom: 15),
-          width: MediaQuery.of(context).size.width * 0.9,
-          child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.yellow,
-                  foregroundColor: Colors.black,
-                  elevation: 1,
-              ),
-              onPressed: () {
-                locator.get<AuthCubit>().finishWelcomeScreen();
-              },
-              child: const Text("К мероприятия")),
-        ),
+          !flagFinishWelcomeScreen
+              ? Container(
+                  height: 60,
+                  padding: const EdgeInsets.all(5),
+                  margin: const EdgeInsets.only(bottom: 15),
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  child: TextButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.yellow.shade700,
+                        foregroundColor: Colors.black,
+                        elevation: 1,
+                      ),
+                      onPressed: () {
+//                        pageController.page.;
+                      },
+                      child: Text("Продолжить",style:Theme.of(context).textTheme.displayMedium),
+                ))
+              : Container(
+                  height: 60,
+                  padding: const EdgeInsets.all(5),
+                  margin: const EdgeInsets.only(bottom: 15),
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.yellow,
+                        foregroundColor: Colors.black,
+                        elevation: 1,
+                      ),
+                      onPressed: () {
+                        locator.get<AuthCubit>().finishWelcomeScreen();
+                      },
+                      child: const Text("К мероприятия")),
+                ),
       ],
-    ));
+    ),
+        ));
   }
 }
-
-

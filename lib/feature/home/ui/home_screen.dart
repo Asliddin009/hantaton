@@ -1,8 +1,22 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
+import '../../../app/domain/notification/notification_controller.dart';
+
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    NotificationController.startListeningNotificationEvents();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -12,27 +26,31 @@ class HomeScreen extends StatelessWidget {
           width: double.infinity,
           color: Colors.yellow.shade700,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Row(
-                  children: [
-                    Container()
-
-                  ],
+              Center(
+                child: Text('dsa'),
               )
             ],
           ),
         ),
         Container(
-          margin: const EdgeInsets.only(top: 150),
-
-          decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(topLeft: Radius.circular(25),topRight: Radius.circular(25))
-          ),
-          width: double.infinity,
-          height: double.infinity,
-        )
+            margin: const EdgeInsets.only(top: 150),
+            decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(25),
+                    topRight: Radius.circular(25))),
+            width: double.infinity,
+            height: double.infinity,
+            child: Center(
+              child: TextButton(
+                onPressed: () async{
+                  NotificationController.scheduleNewNotification(null);
+                  },
+                child: const Text("Поставить уведомление "),
+              ),
+            ))
       ],
     );
   }

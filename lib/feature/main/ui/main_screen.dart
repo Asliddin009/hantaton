@@ -5,6 +5,7 @@ import 'package:hantaton_app/feature/auth/ui/user_screen.dart';
 import 'package:hantaton_app/feature/home/ui/home_screen.dart';
 import 'package:hantaton_app/feature/main/ui/search_screen.dart';
 
+
 import 'chat_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -15,7 +16,8 @@ class MainScreen extends StatefulWidget {
     Icons.notifications,
     Icons.account_circle,
   ];
-
+  static final GlobalKey<NavigatorState> navigatorKey =
+  GlobalKey<NavigatorState>();
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
