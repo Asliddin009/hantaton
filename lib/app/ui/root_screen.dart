@@ -4,6 +4,7 @@ import 'package:hantaton_app/feature/auth/ui/welcome_screen.dart';
 import 'package:hantaton_app/feature/main/ui/main_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../../feature/auth/ui/components/like_category.dart';
 import '../../feature/auth/ui/login_screen.dart';
 
 class RootScreen extends StatelessWidget {
@@ -14,7 +15,7 @@ class RootScreen extends StatelessWidget {
     return AuthBuilder(
       isNotAuthorized: (context) => const WelcomeScreen(),
       isWaiting: (context) => const AppLoader(),
-      isAuthorized: (context, value, child) =>  MainScreen(),
+      isAuthorized: (context, value, child) =>  LikeCategory(),
     );
   }
 }
