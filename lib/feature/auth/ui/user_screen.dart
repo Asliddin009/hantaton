@@ -1,5 +1,6 @@
 import 'dart:core';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:hantaton_app/app/ui/components/app_text_button.dart';
 import 'package:hantaton_app/feature/auth/domain/auth_state/auth_cubit.dart';
 import 'package:hantaton_app/feature/auth/ui/login_screen.dart';
+import 'package:cupertino_icons/cupertino_icons.dart';
 
 class UserScreen extends StatelessWidget {
   UserScreen({super.key});
@@ -33,176 +35,106 @@ class UserScreen extends StatelessWidget {
         );
       }*/
       return Scaffold(
-        body: Container(
-          margin: EdgeInsets.all(25),
+
+        body: SingleChildScrollView(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Stack(
                 children: [
-                  Text(
-                      "Аслиддин",
-                    style: TextStyle(
-                      fontSize: 30,
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.edit),
-                  )
-                ],
-              ),
-              Row(
-                  children: [
-                    Container(
-                      height: MediaQuery.of(context).size.width * 0.4,
-                      width: MediaQuery.of(context).size.width * 0.4,
-                      child: SvgPicture.asset(
-                        'assets/page1.svg'
+                  Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Container(
+                        height: MediaQuery.of(context).size.height*0.503,
+                        color: Colors.white,
+                          child: SvgPicture.asset('assets/account.svg')
                       ),
-                    ),
-                  ]
-              ),
-              Text(
-                "Я крутой программист, я программирую на всем, очень хочу научить всех зарабатывать деньги",
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  fontSize: 18
-                ),
-              ),
-              SizedBox(height: 10,),
-              TextButton.icon(
-                style: ElevatedButton.styleFrom(
-                  fixedSize: Size.fromWidth(MediaQuery.of(context).size.width)
-                ),
-                  onPressed: () {},
-                  icon: Icon(Icons.favorite),
-                  label: Text("Избранное"),
-              ),
-              SizedBox(height: 10,),
-              TextButton.icon(
-                style: ElevatedButton.styleFrom(
-                    fixedSize: Size.fromWidth(MediaQuery.of(context).size.width)
-                ),
-                  onPressed: () {},
-                  icon: Icon(Icons.mood),
-                  label: Text("Категории"),
-              ),
-              SizedBox(height: 10,),
-              Text(
-                  "Организованные события",
-                style: TextStyle(
-                  fontSize: 22
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Предстоит - $toBe событие"
+                      CircleAvatar(
+                          backgroundColor: Colors.transparent,
+                          radius: 68,
+                          backgroundImage: NetworkImage('https://i.stack.imgur.com/UHa1c.png'),
+                      ),
+                    ],
                   ),
-                  Text(
-                    "Прошло - $passed событие"
-                  )
+                  Padding(
+                    padding: const EdgeInsets.all(30.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Icon(Icons.location_on_outlined),
+                        Text("Ханты-мансийск"),
+                        Icon(Icons.date_range),
+                        Text("25 ноября"),
+                      ],
+                    ),
+                  ),
                 ],
               ),
-              SizedBox(height: 15,),
-              Expanded(
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                    itemCount: 5,//event.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                        ),
-                        width: MediaQuery.of(context).size.width,
-                        child: Column(
-                          children: [
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  height: MediaQuery.of(context).size.width * 0.3,
-                                  width: MediaQuery.of(context).size.width * 0.3,
-                                    child: SvgPicture.asset(
-                                        'assets/page2.svg'
-                                    )
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Крутое событие",
-                                      style: TextStyle(
-                                        fontSize: 18
-                                      ),
-                                    ),
-                                    SizedBox(height: 5,),
-                                    Text(
-                                      "Пользователь",
-                                      style: TextStyle(
-                                        fontSize: 14
-                                      ),
-                                    ),
-                                    SizedBox(height: 5,),
-                                    Row(
-                                      children: [
-                                        Icon(Icons.timelapse),
-                                        Text(
-                                          "13.00 - 16.00"
-                                        )
-                                      ],
-                                    ),
-                                    SizedBox(height: 5,),
-                                    Row(
-                                      children: [
-                                        Icon(Icons.date_range),
-                                        Text("1 январяы"),
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        Icon(Icons.location_on_outlined),
-                                        Text("Тц. небо")
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            Text(
-                              "Супер крутое событие, не забудьте взять хорошее настроеие", textAlign: TextAlign.left,
-                               style: TextStyle(
-                                 fontSize: 16,
-                               ),
-                            ),
-                          ],
-                        ),
-                      );
-                    }
+              Container(
+                width: double.infinity,
+                child: Text(
+                    "Ситников Никита",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 25
+                  ),
                 ),
               ),
               Container(
-                height: 60,
-                padding: const EdgeInsets.all(5),
-                margin: const EdgeInsets.only(bottom: 15),
-                width: MediaQuery.of(context).size.width * 0.9,
-                child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.grey,
-                      foregroundColor: Colors.black,
-                      elevation: 1,
+                child: Text(
+                  "Люблю ходить в похды и активные виды спорта. Рад новым знакомствам.",
+                  style: TextStyle(
+                    fontSize: 16
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              SizedBox(height: 30,),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(topRight: Radius.circular(30.0), topLeft: Radius.circular(30.0)
+                  ),
+                ),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20.0),
+                      child: Text(
+                        "Мои Мероприятия",
+                        style: TextStyle(
+                          fontSize: 18
+                        ),
+                      ),
                     ),
-                    onPressed: () {
-
-                    },
-                    child: const Text("Пропустить")),
+                    Stack(
+                      alignment: Alignment.bottomCenter,
+                      children: [
+                        SvgPicture.asset('assets/no_event.svg'),
+                        Container(
+                          height: 100,
+                          padding: EdgeInsets.only(top: 20),
+                          margin: EdgeInsets.only(bottom: 100),
+                          color: Colors.black26,
+                          child: Text(
+                            "У вас пока нет созданных мероприятий",
+                            style: TextStyle(
+                              fontSize: 22,
+                              color: Colors.white
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        )
+                      ],
+                    )
+                  ],
+                ),
               ),
             ],
           ),
         ),
+      backgroundColor: Color.fromRGBO(255, 199, 38, 10000),
       );
     });
   }
