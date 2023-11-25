@@ -1,10 +1,11 @@
 import 'package:hantaton_app/app/ui/app_loader.dart';
+import 'package:hantaton_app/feature/auth/ui/card_event.dart';
 import 'package:hantaton_app/feature/auth/ui/components/auth_builder.dart';
 import 'package:hantaton_app/feature/auth/ui/welcome_screen.dart';
 import 'package:hantaton_app/feature/main/ui/main_screen.dart';
 import 'package:flutter/material.dart';
 
-import '../../feature/auth/ui/components/like_category.dart';
+import '../../feature/auth/ui/like_category.dart';
 import '../../feature/auth/ui/login_screen.dart';
 
 class RootScreen extends StatelessWidget {
@@ -15,7 +16,7 @@ class RootScreen extends StatelessWidget {
     return AuthBuilder(
       isNotAuthorized: (context) => const WelcomeScreen(),
       isWaiting: (context) => const AppLoader(),
-      isAuthorized: (context, value, child) =>  LikeCategory(),
+      isAuthorized: (context, value, child) =>  CardEvent(),
     );
   }
 }

@@ -2,7 +2,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:hantaton_app/feature/auth/domain/auth_state/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hantaton_app/feature/auth/ui/components/like_category.dart';
+import 'package:hantaton_app/feature/auth/ui/like_category.dart';
 import 'package:hantaton_app/feature/auth/ui/login_screen.dart';
 
 import '../../../app/ui/components/app_text_button.dart';
