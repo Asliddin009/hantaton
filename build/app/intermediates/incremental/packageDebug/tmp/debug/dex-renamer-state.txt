@@ -1,0 +1,4 @@
+#Sat Nov 25 11:12:26 YEKT 2023
+base.0=C\:\\Users\\Admin\\hantaton\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
