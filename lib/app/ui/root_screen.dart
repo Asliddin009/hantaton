@@ -12,7 +12,7 @@ class RootScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AuthBuilder(
-      isNotAuthorized: (context) => WelcomeScreen(),
+      isNotAuthorized: (context) => const WelcomeScreen(),
       isWaiting: (context) => const AppLoader(),
       isAuthorized: (context, value, child) =>  MainScreen(),
     );

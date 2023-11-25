@@ -33,4 +33,17 @@ abstract class AppApi {
   Future<dynamic> deletePost(String id);
 
   Future<dynamic> createPost(Map args);
+
+  Future<dynamic> fetchCategories();
+  Future<dynamic> fetchCategory(String id);
+  Future<dynamic> deleteCategory(String id);
+
+  Future<dynamic> createCategory(String name);
+
+
+  Future<dynamic> fetchEvents();
+  Future<dynamic> fetchEvent(String id);
+  Future<dynamic> deleteEvent(String id);
+
+  Future<dynamic> createEvent(Map<String,dynamic> name);
 }
