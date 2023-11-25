@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hantaton_app/app/ui/components/app_text_button.dart';
 import 'package:hantaton_app/feature/auth/ui/page_1.dart';
 import 'package:hantaton_app/feature/auth/ui/page_2.dart';
 import 'package:hantaton_app/feature/auth/ui/page_3.dart';
@@ -72,11 +73,11 @@ class _WelcomeScreenState extends State<WelcomeScreen>
               const SizedBox(
                 height: 25,
               ),
-              ElevatedButton(
+              AppTextButton(
                   onPressed: () {
                     locator.get<AuthCubit>().finishWelcomeScreen();
                   },
-                  child: const Text("Пропустить")),
+                  text: pageController.page==3?'Начать':'Пропустить',),
               const SizedBox(
                 height: 50,
               )

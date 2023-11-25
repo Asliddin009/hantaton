@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:hantaton_app/app/di/init_di.dart';
 import 'package:hantaton_app/app/domain/app_builder.dart';
 import 'package:hantaton_app/app/ui/root_screen.dart';
@@ -10,10 +12,27 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../feature/map/domain/bloc/map_cubit.dart';
 
 class MainAppBuilder implements AppBuilder {
+  static const maxPossibleTsf = 1.1;
+
   @override
   Widget buildApp() {
-    return const _GlobalProviders(
-      child: MaterialApp(debugShowCheckedModeBanner: false, home: RootScreen()),
+    return _GlobalProviders(
+      child: MaterialApp(
+          builder: (context, child) {
+            final data = MediaQuery.of(context);
+            final newTextScaleFactor = min(maxPossibleTsf, data.textScaleFactor);
+            // можно так, если нам надо задать минимальное и
+            // максимальное значение:
+            // data.textScaleFactor.clamp(minPossibleTsf, maxPossibleTsf);
+            return MediaQuery(
+              data: data.copyWith(
+                textScaleFactor: newTextScaleFactor,
+              ),
+              child: child ?? const SizedBox.shrink(),
+            );
+          },
+
+          debugShowCheckedModeBanner: false, home: RootScreen()),
     );
   }
 }

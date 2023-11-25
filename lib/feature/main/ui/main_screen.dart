@@ -1,46 +1,58 @@
-import 'package:hantaton_app/app/ui/components/app_dialog.dart';
-import 'package:hantaton_app/feature/auth/domain/entities/user_entity/user_entity.dart';
-import 'package:hantaton_app/feature/auth/ui/user_screen.dart';
-import 'package:hantaton_app/feature/posts/domain/state/cubit/post_cubit.dart';
-import 'package:hantaton_app/feature/posts/ui/post_list.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hantaton_app/feature/auth/ui/user_screen.dart';
+import 'package:hantaton_app/feature/main/ui/home_screen.dart';
+import 'package:hantaton_app/feature/main/ui/search_screen.dart';
 
-class MainScreen extends StatelessWidget {
-  const MainScreen({Key? key, required this.userEntity}) : super(key: key);
+import 'chat_screen.dart';
 
-  final UserEntity userEntity;
+class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
+
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
+  int _selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text("MainScreen"),
-          actions: [
-            IconButton(
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) => AppDialog(
-                      val1: "name",
-                      val2: "content",
-                      onPressed: (v1, v2) {
-                        context.read<PostBloc>().add(
-                            PostEvent.createPost({"name": v1, "content": v2}));
-                      },
-                    ),
-                  );
-                },
-                icon: const Icon(Icons.email)),
-            IconButton(
-                onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const UserScreen(),
-                    )),
-                icon: const Icon(Icons.account_box)),
-          ],
-        ),
-        body: const PostList());
+      body: _rootBody(_selectedIndex),
+
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem> [
+          BottomNavigationBarItem(icon:Icon(Icons.home,color: Colors.orange,),label: ""),
+          BottomNavigationBarItem(icon:Icon(Icons.search,color: Colors.orange,),label: ""),
+          BottomNavigationBarItem(icon:Icon(Icons.chat,color: Colors.orange,),label: ""),
+          BottomNavigationBarItem(icon:Icon(Icons.person_outlined,color: Colors.orange,),label: ""),
+
+        ],
+        currentIndex: _selectedIndex,
+        //selectedItemColor: Theme.of(context).,
+        onTap: _onItemTapped,
+      ),
+    );
+  }
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+  Widget _rootBody(int selectedIndex){
+    switch(selectedIndex){
+      case 0:
+        return const HomeScreen();
+      case 1:
+        return  SearchScreen();
+      case 2:
+        return const ChatScreen();
+      case 3:
+        return const UserScreen();
+      default:
+        return const HomeScreen();
+    }
+
   }
 }
+
