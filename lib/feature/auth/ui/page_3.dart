@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class Page3 extends StatelessWidget {
   const Page3({super.key});
@@ -6,9 +7,7 @@ class Page3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: const Center(
-        child: Text("3 страница"),
-      ),
+        child: SvgPicture.asset('assets/page3.svg')
     );
   }
 }
