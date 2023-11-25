@@ -73,8 +73,8 @@ class _MapScreenState extends State<MapScreen> {
           body:FlutterMap(
                   mapController: _mapController,
                   options: MapOptions(
-                    initialCenter: LatLng(state.latitude??55.755793,state.longitude??37.617134),
-                    initialZoom: 5,
+                    initialCenter: LatLng(state.latitude,state.longitude),
+                    initialZoom: 10,
                   ),
                   children: [
                     TileLayer(

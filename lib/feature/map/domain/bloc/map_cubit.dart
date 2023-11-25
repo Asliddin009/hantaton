@@ -30,7 +30,10 @@ class MapCubit extends Cubit<MapState> {
             const AsyncSnapshot.withData(ConnectionState.done, null)));
       });
     }catch(error){
-      emit(state.copyWith(asyncSnapshot: AsyncSnapshot.withError(ConnectionState.done, error)));
+      emit(state.copyWith(
+          latitude:55.755793,
+          longitude:37.617134,
+          asyncSnapshot: AsyncSnapshot.withError(ConnectionState.done, error)));
     }
    }
 

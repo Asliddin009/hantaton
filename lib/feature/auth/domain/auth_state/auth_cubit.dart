@@ -18,6 +18,14 @@ class AuthCubit extends HydratedCubit<AuthState> {
 
   final AuthRepository authRepository;
 
+
+
+  void finishWelcomeScreen() {
+    emit(AuthState.waiting());
+    Future.delayed(const Duration(milliseconds: 400)).then((value) =>
+        emit(AuthState.authorized(const UserEntity(email: '', username: '', id: ''))));
+  }
+
   Future<void> signIn({
     required String username,
     required String password,
