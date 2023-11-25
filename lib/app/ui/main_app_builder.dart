@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:hantaton_app/app/di/init_di.dart';
 import 'package:hantaton_app/app/domain/app_builder.dart';
 import 'package:hantaton_app/app/ui/root_screen.dart';
+import 'package:hantaton_app/app/ui/theme/theme.dart';
 import 'package:hantaton_app/feature/auth/domain/auth_state/auth_cubit.dart';
 import 'package:hantaton_app/feature/posts/domain/post_repo.dart';
 import 'package:hantaton_app/feature/posts/domain/state/cubit/post_cubit.dart';
@@ -18,6 +19,7 @@ class MainAppBuilder implements AppBuilder {
   Widget buildApp() {
     return _GlobalProviders(
       child: MaterialApp(
+          theme:theme,
           builder: (context, child) {
             final data = MediaQuery.of(context);
             final newTextScaleFactor = min(maxPossibleTsf, data.textScaleFactor);

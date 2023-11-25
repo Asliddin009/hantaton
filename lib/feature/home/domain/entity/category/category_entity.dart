@@ -1,25 +1,17 @@
 import 'package:hantaton_app/feature/posts/domain/entity/author/author_entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'event_entity.freezed.dart';
+part 'category_entity.freezed.dart';
 
-part 'event_entity.g.dart';
+part 'category_entity.g.dart';
 
 @freezed
-class EventEntity with _$EventEntity {
-  const factory EventEntity({
+class CategoryEntity with _$CategoryEntity {
+  const factory CategoryEntity({
     int? id,
-    int? placeId,
-    int? categoryId,
-    int? minimumAge,
-    int? price,
-    int? organizatorId,
-    String? photo,
     @Default('') String name,
-    @Default('') String description,
-    DateTime dateStart,
-  }) = _EventEntity;
+  }) = _CategoryEntity;
 
-  factory EventEntity.fromJson(Map<String, dynamic> json) =>
-      _$EventEntityFromJson(json);
+  factory CategoryEntity.fromJson(Map<String, dynamic> json) =>
+      _$CategoryEntityFromJson(json);
 }
