@@ -111,4 +111,51 @@ class DioAppApi implements AppApi {
   Future deletePost(String id) {
     return dio.delete("/data/posts/$id");
   }
+
+  @override
+  Future createCategory(String name) {
+    return dio.post("/category/",data: {
+      'name':name
+    });
+  }
+
+  @override
+  Future createEvent(Map<String,dynamic> data) {
+    return dio.post("/category/",data: data);
+  }
+
+  @override
+  Future deleteCategory(String id) {
+    return dio.delete("/category/$id");
+
+  }
+
+  @override
+  Future deleteEvent(String id) {
+    return dio.delete("/event/$id");
+
+  }
+
+  @override
+  Future fetchCategories() {
+    return dio.get("/category/");
+  }
+
+  @override
+  Future fetchCategory(String id) {
+    return dio.get("/category/$id");
+  }
+
+  @override
+  Future fetchEvent(String id) {
+    return dio.get("/event/$id");
+  }
+
+  @override
+  Future fetchEvents() {
+    return dio.get("/event/");
+  }
 }
+
+
+

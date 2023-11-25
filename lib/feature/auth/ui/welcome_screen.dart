@@ -37,6 +37,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   String subTitle =
       "Расписание, анонсы и описание мероприятий структурированы и собраны воедино специально для вас.";
 
+  int nextPage=1;
   @override
   void initState() {
     super.initState();
@@ -71,7 +72,13 @@ class _WelcomeScreenState extends State<WelcomeScreen>
               controller: pageController,
               onPageChanged: (index) {
                 setState(() {
-                  flagFinishWelcomeScreen = (index == 3);
+                  if(index==3){
+                    flagFinishWelcomeScreen=true;
+                    nextPage=index;
+                  }else{
+                    flagFinishWelcomeScreen=false;
+                    nextPage=index+1;
+                  }
                   title = listTitle[index];
                   subTitle = listSubTitle[index];
                 });
@@ -93,8 +100,10 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                 SmoothPageIndicator(
                   controller: pageController,
                   count: 4,
-                  effect: const WormEffect(
-                    activeDotColor: Colors.black26,
+                  effect:  WormEffect(
+                    dotHeight: 10,
+                    dotWidth: 10,
+                    activeDotColor: Colors.yellow.shade700,
                     type: WormType.thin,
                   ),
                 ),
@@ -132,7 +141,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                         elevation: 1,
                       ),
                       onPressed: () {
-//                        pageController.page.;
+                        pageController.animateToPage(nextPage, duration: Duration(milliseconds: 300), curve: Curves.easeIn);
                       },
                       child: Text("Продолжить",style:Theme.of(context).textTheme.displayMedium),
                 ))
