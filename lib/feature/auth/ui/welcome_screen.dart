@@ -83,17 +83,15 @@ class _WelcomeScreenState extends State<WelcomeScreen>
               Text(
                 textAlign: TextAlign.center,
                 title,
-                style: const TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold
-                ),
+                style: Theme.of(context).textTheme.displayMedium
               ),
               const SizedBox(height: 35,),
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.9,
                 child: Text(
                     textAlign: TextAlign.center,
-                    subTitle
+                    subTitle,
+                  style: Theme.of(context).textTheme.displaySmall,
                 ),
               )
             ],

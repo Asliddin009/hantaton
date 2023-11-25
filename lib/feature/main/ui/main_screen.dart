@@ -1,12 +1,20 @@
+import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hantaton_app/feature/auth/ui/user_screen.dart';
-import 'package:hantaton_app/feature/main/ui/home_screen.dart';
+import 'package:hantaton_app/feature/home/ui/home_screen.dart';
 import 'package:hantaton_app/feature/main/ui/search_screen.dart';
 
 import 'chat_screen.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+  MainScreen({super.key});
+  final iconList = <IconData>[
+    Icons.home,
+    Icons.heart_broken,
+    Icons.notifications,
+    Icons.account_circle,
+  ];
 
   @override
   State<MainScreen> createState() => _MainScreenState();
@@ -19,25 +27,29 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _rootBody(_selectedIndex),
-
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem> [
-          BottomNavigationBarItem(icon:Icon(Icons.home,color: Colors.orange,),label: ""),
-          BottomNavigationBarItem(icon:Icon(Icons.search,color: Colors.orange,),label: ""),
-          BottomNavigationBarItem(icon:Icon(Icons.chat,color: Colors.orange,),label: ""),
-          BottomNavigationBarItem(icon:Icon(Icons.person_outlined,color: Colors.orange,),label: ""),
-
+      floatingActionButton: FloatingActionButton(onPressed: () {  },
+        backgroundColor: Colors.yellow.shade700,
+      child: const Icon(Icons.add),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: AnimatedBottomNavigationBar(
+        splashColor: Colors.black,
+        activeColor: Colors.yellow.shade700,
+        icons: const <IconData>[
+          Icons.home,
+          CupertinoIcons.heart_solid,
+          Icons.notifications,
+          Icons.account_circle,
         ],
-        currentIndex: _selectedIndex,
-        //selectedItemColor: Theme.of(context).,
-        onTap: _onItemTapped,
+        activeIndex: _selectedIndex,
+        hideAnimationCurve: Curves.easeOut,
+        gapLocation: GapLocation.center,
+        leftCornerRadius: 5,
+        rightCornerRadius: 5,
+        onTap: (index) => setState(() => _selectedIndex = index),
+        //other params
       ),
     );
-  }
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
   }
   Widget _rootBody(int selectedIndex){
     switch(selectedIndex){
