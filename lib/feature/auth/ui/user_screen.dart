@@ -49,7 +49,7 @@ class UserScreen extends StatelessWidget {
                         color: Colors.white,
                           child: SvgPicture.asset('assets/account.svg')
                       ),
-                      CircleAvatar(
+                      const CircleAvatar(
                           backgroundColor: Colors.transparent,
                           radius: 68,
                           backgroundImage: NetworkImage('https://i.stack.imgur.com/UHa1c.png'),

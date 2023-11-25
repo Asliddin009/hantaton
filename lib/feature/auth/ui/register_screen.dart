@@ -9,7 +9,11 @@ class RegisterScreen extends StatelessWidget {
   RegisterScreen({Key? key}) : super(key: key);
 
   final controllerLogin = TextEditingController();
+  final controllerFirstName = TextEditingController();
+  final controllerLastName = TextEditingController();
   final controllerEmail = TextEditingController();
+  final controllerDescription = TextEditingController();
+
   final controllerPassword = TextEditingController();
   final controllerPassword2 = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey();
@@ -26,9 +30,15 @@ class RegisterScreen extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
+                AppTextField(controller: controllerFirstName, labelText: "Имя"),
+                const SizedBox(height: 16),
+                AppTextField(controller: controllerLastName, labelText: "Фамилия"),
+                const SizedBox(height: 16),
                 AppTextField(controller: controllerLogin, labelText: "логин"),
                 const SizedBox(height: 16),
                 AppTextField(controller: controllerEmail, labelText: "email"),
+                const SizedBox(height: 16),
+                AppTextField(controller: controllerDescription, labelText: "описание"),
                 const SizedBox(height: 16),
                 AppTextField(
                   obscureText: true,
@@ -68,6 +78,7 @@ class RegisterScreen extends StatelessWidget {
   void _onTapToSignUp(AuthCubit authCubit) => authCubit.signUp(
         username: controllerLogin.text,
         password: controllerPassword.text,
-        email: controllerEmail.text,
+        email: controllerEmail.text, rePassword: controllerPassword2.text, description: controllerDescription.text, firstName: controllerFirstName.text,lastName: controllerLastName.text,
+
       );
 }

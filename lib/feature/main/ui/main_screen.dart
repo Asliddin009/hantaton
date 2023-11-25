@@ -10,12 +10,7 @@ import 'chat_screen.dart';
 
 class MainScreen extends StatefulWidget {
   MainScreen({super.key});
-  final iconList = <IconData>[
-    Icons.home,
-    Icons.heart_broken,
-    Icons.notifications,
-    Icons.account_circle,
-  ];
+
   static final GlobalKey<NavigatorState> navigatorKey =
   GlobalKey<NavigatorState>();
   @override

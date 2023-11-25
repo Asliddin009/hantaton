@@ -1,5 +1,6 @@
 import 'package:hantaton_app/app/domain/error_entity/error_entity.dart';
 import 'package:hantaton_app/feature/auth/domain/auth_repository.dart';
+import 'package:hantaton_app/feature/auth/domain/entities/token_entity/token_entity.dart';
 import 'package:hantaton_app/feature/auth/domain/entities/user_entity/user_entity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -18,23 +19,33 @@ class AuthCubit extends HydratedCubit<AuthState> {
 
   final AuthRepository authRepository;
 
-
-
   void finishWelcomeScreen() {
     emit(AuthState.waiting());
     Future.delayed(const Duration(milliseconds: 400)).then((value) =>
-        emit(AuthState.authorized(const UserEntity(email: '', username: '', id: ''))));
+        emit(AuthState.authorized(const UserEntity(username: '', id: 0))));
   }
 
   Future<void> signIn({
-    required String username,
+    required String email,
     required String password,
   }) async {
     emit(AuthState.waiting());
     try {
-      final UserEntity userEntity =
-          await authRepository.signIn(password: password, username: username);
-      emit(AuthState.authorized(userEntity));
+      final TokenEntity token =
+          await authRepository.signIn(password: password, email: email);
+      emit(AuthState.authorized(UserEntity(
+          username: '',
+          id: 0,
+          accessToken: token.access,
+          refreshToken: token.refresh)));
+      final UserEntity userEntity = await authRepository.getProfile();
+      emit(AuthState.authorized(UserEntity(
+          username: userEntity.username,
+          id: userEntity.id,
+          accessToken: token.access,
+          refreshToken: token.refresh,
+          last_name: userEntity.last_name,
+          first_name: userEntity.first_name)));
     } catch (error, st) {
       addError(error, st);
     }
@@ -45,12 +56,22 @@ class AuthCubit extends HydratedCubit<AuthState> {
   Future<void> signUp({
     required String username,
     required String password,
+    required String rePassword,
     required String email,
+    required String description,
+    required String firstName,
+    required String lastName,
   }) async {
     emit(AuthState.waiting());
     try {
       final UserEntity userEntity = await authRepository.signUp(
-          password: password, username: username, email: email);
+          password: password,
+          username: username,
+          email: email,
+          rePassword: rePassword,
+          description: description,
+          firstName: firstName,
+          lastName: lastName);
       emit(AuthState.authorized(userEntity));
     } catch (error, st) {
       addError(error, st);
@@ -75,8 +96,8 @@ class AuthCubit extends HydratedCubit<AuthState> {
       final UserEntity newUserEntity = await authRepository.getProfile();
       emit(state.maybeWhen(
         orElse: () => state,
-        authorized: (userEntity) => AuthState.authorized(userEntity.copyWith(
-            email: newUserEntity.email, username: newUserEntity.username)),
+        authorized: (userEntity) => AuthState.authorized(
+            userEntity.copyWith(username: newUserEntity.username)),
       ));
       _updateUserState(const AsyncSnapshot.withData(
           ConnectionState.done, "Успешное получение данных"));
@@ -110,8 +131,8 @@ class AuthCubit extends HydratedCubit<AuthState> {
           username: isEmptyUsername ? null : username);
       emit(state.maybeWhen(
         orElse: () => state,
-        authorized: (userEntity) => AuthState.authorized(userEntity.copyWith(
-            email: newUserEntity.email, username: newUserEntity.username)),
+        authorized: (userEntity) => AuthState.authorized(
+            userEntity.copyWith(username: newUserEntity.username)),
       ));
       _updateUserState(const AsyncSnapshot.withData(
           ConnectionState.done, "Успешное обновление данных"));

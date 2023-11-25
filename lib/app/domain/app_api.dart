@@ -2,14 +2,12 @@ import 'package:dio/dio.dart';
 
 abstract class AppApi {
   Future<dynamic> signUp({
-    required String password,
-    required String username,
-    required String email,
+    required Map<String,dynamic> data,
   });
 
   Future<dynamic> signIn({
     required String password,
-    required String username,
+    required String email,
   });
 
   Future<dynamic> getProfile();
