@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hantaton_app/feature/auth/ui/page_1.dart';
 import 'package:hantaton_app/feature/auth/ui/page_2.dart';
 import 'package:hantaton_app/feature/auth/ui/page_3.dart';
+import 'package:hantaton_app/feature/auth/ui/page_4.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:hantaton_app/app/di/init_di.dart';
 
@@ -20,10 +21,17 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   PageController pageController = PageController();
   bool flagFinishWelcomeScreen = false;
 
+  List listTitle = ["Все мероприятия вашего города в одном месте!", "С нами планировать свой досуг проще!", "Создавайте свои собственные мероприятия!", "ппппппп!"];
+  List listSubTitle = ["Расписание, анонсы и описание мероприятий структурированы и собраны воедино специально для вас.", "Личный кабинет и система уведомлений помогут вам сохранить понравившиеся мероприятия и не забыть про них позже.", "Организуйте мероприятия сами, собирайте друзей и находите новые компании по интересам.", "тоже какой-то текст."];
+  String title = "";
+  String subTitle = "";
+
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(vsync: this);
+    title = listTitle[0];
+    subTitle = listSubTitle[0];
   }
 
   @override
@@ -36,54 +44,98 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   Widget build(BuildContext context) {
     return Scaffold(
         //backgroundColor: ConstColor.BACKGROUND_COLOR,
-        body: Stack(
+        body: Column(
       children: [
-        Container(
-          alignment: const Alignment(0, -0.9),
-          child: Text("test",),
-        ),
-        PageView(
-          controller: pageController,
-          onPageChanged: (index) {
-            setState(() {
-              flagFinishWelcomeScreen = (index == 2);
-            });
-          },
-          children: const [
-            Page1(),
-            Page2(),
-            Page3(),
-          ],
+        Expanded(
+          flex: 4,
+          child: PageView(
+            controller: pageController,
+            onPageChanged: (index) {
+              setState(() {
+                flagFinishWelcomeScreen = (index == 3);
+                title = listTitle[index];
+                subTitle = listSubTitle[index];
+              });
+            },
+            children: const [
+              Page1(),
+              Page2(),
+              Page3(),
+              Page4(),
+            ],
+          ),
         ),
         // Панель Навигации снизу
-        Container(
-          alignment: Alignment(0, 0.75),
+        Expanded(
+          flex: 3,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SmoothPageIndicator(
                 controller: pageController,
-                count: 3,
+                count: 4,
                 effect: WormEffect(
-                  activeDotColor: Theme.of(context).primaryColor,
+                  activeDotColor: Colors.black26,
                   type: WormType.thin,
                 ),
               ),
-              const SizedBox(
-                height: 25,
+              SizedBox(height: 20,),
+              Text(
+                textAlign: TextAlign.center,
+                title,
+                style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold
+                ),
               ),
-              ElevatedButton(
-                  onPressed: () {
-                    locator.get<AuthCubit>().finishWelcomeScreen();
-                  },
-                  child: const Text("Пропустить")),
-              const SizedBox(
-                height: 50,
+              SizedBox(height: 35,),
+              Container(
+                width: MediaQuery.of(context).size.width * 0.9,
+                child: Text(
+                    textAlign: TextAlign.center,
+                    subTitle
+                ),
               )
             ],
           ),
+        ),
+        !flagFinishWelcomeScreen ?
+        Container(
+          height: 60,
+          padding: EdgeInsets.all(5),
+          margin: EdgeInsets.only(bottom: 15),
+          width: MediaQuery.of(context).size.width * 0.9,
+          child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.grey,
+                  foregroundColor: Colors.black,
+                  elevation: 1,
+              ),
+              onPressed: () {
+                locator.get<AuthCubit>().finishWelcomeScreen();
+              },
+              child: const Text("Пропустить")),
         )
+        :
+        Container(
+          height: 60,
+          padding: EdgeInsets.all(5),
+          margin: EdgeInsets.only(bottom: 15),
+          width: MediaQuery.of(context).size.width * 0.9,
+          child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.yellow,
+                  foregroundColor: Colors.black,
+                  elevation: 1,
+              ),
+              onPressed: () {
+                locator.get<AuthCubit>().finishWelcomeScreen();
+              },
+              child: const Text("Смотерть мероприятия")),
+        ),
       ],
     ));
   }
 }
+
+
