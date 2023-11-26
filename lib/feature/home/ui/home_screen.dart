@@ -3,11 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hantaton_app/app/di/init_di.dart';
 import 'package:hantaton_app/app/ui/components/base_skeleton.dart';
-import 'package:hantaton_app/feature/auth/domain/auth_state/auth_cubit.dart';
 import 'package:hantaton_app/feature/home/domain/state/cubit/home_cubit.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:hantaton_app/feature/home/domain/utils.dart';
+import 'package:hantaton_app/feature/home/ui/components/container_tile.dart';
 
 import '../../../app/domain/notification/notification_controller.dart';
+import 'components/event_bottom_sheet.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -84,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     width: double.infinity,
                     height: double.infinity,
                     child: Center(
-                      child: Column(
+                      child: ListView(
                         children: [
                           SizedBox(
                             width: double.infinity,
@@ -114,18 +115,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                     color: Colors.yellow.shade700,
                                   ),
                                   width: 100,
-                                  height: 100,
+                                  height: 70,
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
-                                      Text(
-                                        state.categoryList[index].name,
-                                        style: const TextStyle(
-                                          fontSize: 16,
-                                        ),
-                                      ),
+                                      Expanded(child: SvgPicture.asset(UtilsHome.getUrlSvg(state.categoryList[index].name)??"assets/book.svg")),
+
+
                                     ],
                                   ),
                                 );
@@ -149,6 +147,32 @@ class _HomeScreenState extends State<HomeScreen> {
                             },
                             child: const Text("Поставить уведомление "),
                           ),*/
+                          Container(
+                            padding: const EdgeInsets.only(left: 15,right: 15),
+                            height: 300,
+                            width: double.infinity,
+                            child: ListView.separated(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: state.eventList.length,
+                              separatorBuilder:
+                                  (BuildContext context, int index) =>
+                              const SizedBox(
+                                width: 16,
+                              ),
+                              itemBuilder: (BuildContext context, int index) {
+                                return ContainerTile(entity: state.eventList[index], onTap: () {
+                                  showBottomSheet(context: context, builder: (context)=>AppBottomSheet(context: context, eventEntity:state.eventList[index]));
+                                },);
+                              },
+                            ),
+                          ),
+                          const Text(
+                            "Рекомендации",
+                            style: TextStyle(
+                              fontSize: 18,
+                            ),
+                            textAlign: TextAlign.start,
+                          ),
                           Container(
                             padding: const EdgeInsets.only(left: 15,right: 15),
                             height: 300,
@@ -187,7 +211,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             BorderRadius.all(Radius.circular(15)),
                                           ),
                                           child: Container(
-                                            padding: EdgeInsets.all(15),
+                                            padding: const EdgeInsets.all(15),
                                             child: Column(
                                               children: [
                                                 Text(
@@ -197,7 +221,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 Row(
                                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                   children: [
-
                                                     Text(
                                                       state.eventList[index]?.price==null?"Бесплатно":state.eventList[index]?.price.toString()??" ",
                                                       style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Colors.white,fontWeight: FontWeight.bold),
@@ -220,6 +243,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               },
                             ),
                           ),
+
                         ],
                       ),
                     ))

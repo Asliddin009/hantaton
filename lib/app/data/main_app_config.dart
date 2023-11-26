@@ -5,7 +5,7 @@ import 'package:injectable/injectable.dart';
 @prod
 class ProdAppConfig implements AppConfig {
   @override
-  String get baseUrl => "http://85.95.190.206:8000/api/v1/";
+  String get baseUrl => "http://85.95.190.123/api/v1/";
 
   @override
   String get host => Environment.prod;
