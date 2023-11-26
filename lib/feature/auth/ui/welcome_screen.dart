@@ -37,7 +37,8 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   String subTitle =
       "Расписание, анонсы и описание мероприятий структурированы и собраны воедино специально для вас.";
 
-  int nextPage=1;
+  int nextPage = 1;
+
   @override
   void initState() {
     super.initState();
@@ -57,27 +58,34 @@ class _WelcomeScreenState extends State<WelcomeScreen>
     return Scaffold(
         //backgroundColor: ConstColor.BACKGROUND_COLOR,
         body: Container(
-          padding: const EdgeInsets.all(30),
-          child: Column(
-      children: [
+      padding: const EdgeInsets.all(30),
+      child: Column(
+        children: [
           SizedBox(
-            height: 50,
+              height: 50,
               width: double.infinity,
-              child: IconButton(onPressed: (){
-                locator.get<AuthCubit>().finishWelcomeScreen();
-              }, icon: const Icon(Icons.close,size: 33,),alignment: Alignment.bottomRight,)),
+              child: IconButton(
+                onPressed: () {
+                  locator.get<AuthCubit>().finishWelcomeScreen();
+                },
+                icon: const Icon(
+                  Icons.close,
+                  size: 33,
+                ),
+                alignment: Alignment.bottomRight,
+              )),
           Expanded(
             flex: 4,
             child: PageView(
               controller: pageController,
               onPageChanged: (index) {
                 setState(() {
-                  if(index==3){
-                    flagFinishWelcomeScreen=true;
-                    nextPage=index;
-                  }else{
-                    flagFinishWelcomeScreen=false;
-                    nextPage=index+1;
+                  if (index == 3) {
+                    flagFinishWelcomeScreen = true;
+                    nextPage = index;
+                  } else {
+                    flagFinishWelcomeScreen = false;
+                    nextPage = index + 1;
                   }
                   title = listTitle[index];
                   subTitle = listSubTitle[index];
@@ -100,7 +108,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                 SmoothPageIndicator(
                   controller: pageController,
                   count: 4,
-                  effect:  WormEffect(
+                  effect: WormEffect(
                     dotHeight: 10,
                     dotWidth: 10,
                     activeDotColor: Colors.yellow.shade700,
@@ -135,16 +143,19 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                   margin: const EdgeInsets.only(bottom: 15),
                   width: MediaQuery.of(context).size.width * 0.9,
                   child: TextButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.yellow.shade700,
-                        foregroundColor: Colors.black,
-                        elevation: 1,
-                      ),
-                      onPressed: () {
-                        pageController.animateToPage(nextPage, duration: Duration(milliseconds: 300), curve: Curves.easeIn);
-                      },
-                      child: Text("Продолжить",style:Theme.of(context).textTheme.displayMedium),
-                ))
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.yellow.shade700,
+                      foregroundColor: Colors.black,
+                      elevation: 1,
+                    ),
+                    onPressed: () {
+                      pageController.animateToPage(nextPage,
+                          duration: Duration(milliseconds: 300),
+                          curve: Curves.easeIn);
+                    },
+                    child: Text("Продолжить",
+                        style: Theme.of(context).textTheme.displayMedium),
+                  ))
               : Container(
                   height: 60,
                   padding: const EdgeInsets.all(5),
@@ -161,8 +172,8 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                       },
                       child: const Text("К мероприятия")),
                 ),
-      ],
-    ),
-        ));
+        ],
+      ),
+    ));
   }
 }

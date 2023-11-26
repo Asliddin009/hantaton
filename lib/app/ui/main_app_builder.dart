@@ -5,6 +5,7 @@ import 'package:hantaton_app/app/domain/app_builder.dart';
 import 'package:hantaton_app/app/ui/root_screen.dart';
 import 'package:hantaton_app/app/ui/theme/theme.dart';
 import 'package:hantaton_app/feature/auth/domain/auth_state/auth_cubit.dart';
+import 'package:hantaton_app/feature/home/domain/state/cubit/home_cubit.dart';
 import 'package:hantaton_app/feature/main/ui/main_screen.dart';
 import 'package:hantaton_app/feature/posts/domain/post_repo.dart';
 import 'package:hantaton_app/feature/posts/domain/state/cubit/post_cubit.dart';
@@ -37,7 +38,7 @@ class MainAppBuilder implements AppBuilder {
             );
           },
 
-          debugShowCheckedModeBanner: false, home: RootScreen()),
+          debugShowCheckedModeBanner: false, home: const RootScreen()),
     );
   }
 }
@@ -54,6 +55,9 @@ class _GlobalProviders extends StatelessWidget {
       ),
       BlocProvider(
         create: (context) => locator.get<MapCubit>(),
+      ),
+      BlocProvider(
+        create: (context) => locator.get<HomeCubit>(),
       ),
       BlocProvider(
           create: (context) =>
