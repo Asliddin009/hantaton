@@ -18,7 +18,7 @@ class BaseSkeletonizer extends StatelessWidget {
       justifyMultiLineText: true,
       effect: ShimmerEffect(
         baseColor: Theme.of(context).canvasColor,
-        highlightColor: Theme.of(context).dividerColor,
+        highlightColor: Colors.yellow.shade700,
       ),
       child: child,
     );

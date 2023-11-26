@@ -13,6 +13,7 @@ import '../../feature/auth/domain/auth_repository.dart' as _i8;
 import '../../feature/auth/domain/auth_state/auth_cubit.dart' as _i14;
 import '../../feature/home/data/net_home_repo.dart' as _i11;
 import '../../feature/home/domain/home_repo.dart' as _i10;
+import '../../feature/home/domain/state/cubit/home_cubit.dart' as _i15;
 import '../../feature/map/domain/bloc/map_cubit.dart' as _i5;
 import '../../feature/posts/data/net_post_repo.dart' as _i13;
 import '../../feature/posts/domain/post_repo.dart' as _i12;
@@ -56,5 +57,6 @@ _i1.GetIt $initGetIt(
   gh.factory<_i10.HomeRepo>(() => _i11.NetHomeRepo(get<_i6.AppApi>()));
   gh.factory<_i12.PostRepo>(() => _i13.NetPostRepo(get<_i6.AppApi>()));
   gh.singleton<_i14.AuthCubit>(_i14.AuthCubit(get<_i8.AuthRepository>()));
+  gh.singleton<_i15.HomeCubit>(_i15.HomeCubit(get<_i10.HomeRepo>()));
   return get;
 }
