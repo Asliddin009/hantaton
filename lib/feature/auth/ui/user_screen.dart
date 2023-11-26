@@ -2,7 +2,6 @@ import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:hantaton_app/app/ui/components/app_text_button.dart';
 import 'package:hantaton_app/feature/auth/domain/auth_state/auth_cubit.dart';
 import 'package:hantaton_app/feature/auth/ui/login_screen.dart';
 
@@ -69,7 +68,7 @@ class UserScreen extends StatelessWidget {
                 Container(
                   child: Text(
                     userEntity?.description ??
-                        "Люблю ходить в похды и активные виды спорта. Рад новым знакомствам.",
+                        "Люблю ходить в походы и активные виды спорта. Рад новым знакомствам.",
                     style: const TextStyle(fontSize: 16),
                     textAlign: TextAlign.center,
                   ),

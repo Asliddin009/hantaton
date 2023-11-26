@@ -12,7 +12,7 @@ _$EventEntityImpl _$$EventEntityImplFromJson(Map<String, dynamic> json) =>
       placeId: json['placeId'] as int?,
       categoryId: json['categoryId'] as int?,
       minimumAge: json['minimumAge'] as int?,
-      price: json['price'] as int?,
+      price: json['price'] as String?,
       organizatorId: json['organizatorId'] as int?,
       photo: json['photo'] as String?,
       name: json['name'] as String? ?? '',

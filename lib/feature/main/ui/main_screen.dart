@@ -1,12 +1,12 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hantaton_app/feature/home/ui/create_event.dart';
 import 'package:hantaton_app/feature/auth/ui/user_screen.dart';
 import 'package:hantaton_app/feature/home/ui/home_screen.dart';
-import 'package:hantaton_app/feature/main/ui/search_screen.dart';
 
 
-import '../../auth/ui/like_category.dart';
+import '../../home/ui/like_category.dart';
 import 'chat_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -25,7 +25,9 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _rootBody(_selectedIndex),
-      floatingActionButton: FloatingActionButton(onPressed: () {  },
+      floatingActionButton: FloatingActionButton(onPressed: () {
+        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>CreateEvent()));
+      },
         backgroundColor: Colors.yellow.shade700,
       child: const Icon(Icons.add),
       ),

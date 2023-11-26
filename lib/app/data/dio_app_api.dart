@@ -155,6 +155,11 @@ class DioAppApi implements AppApi {
   Future fetchEvents() {
     return dio.get("/event/");
   }
+
+  @override
+  Future getRecommendation() {
+    return dio.get('/recommendations/');
+  }
 }
 
 

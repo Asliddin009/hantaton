@@ -21,6 +21,7 @@ mixin _$HomeState {
       throw _privateConstructorUsedError;
   List<CategoryEntity> get categoryList => throw _privateConstructorUsedError;
   List<EventEntity> get eventList => throw _privateConstructorUsedError;
+  List<EventEntity> get recommendedList => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeStateCopyWith<HomeState> get copyWith =>
@@ -35,7 +36,8 @@ abstract class $HomeStateCopyWith<$Res> {
   $Res call(
       {@JsonKey(ignore: true) AsyncSnapshot<dynamic>? asyncSnapshot,
       List<CategoryEntity> categoryList,
-      List<EventEntity> eventList});
+      List<EventEntity> eventList,
+      List<EventEntity> recommendedList});
 }
 
 /// @nodoc
@@ -54,6 +56,7 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
     Object? asyncSnapshot = freezed,
     Object? categoryList = null,
     Object? eventList = null,
+    Object? recommendedList = null,
   }) {
     return _then(_value.copyWith(
       asyncSnapshot: freezed == asyncSnapshot
@@ -67,6 +70,10 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
       eventList: null == eventList
           ? _value.eventList
           : eventList // ignore: cast_nullable_to_non_nullable
+              as List<EventEntity>,
+      recommendedList: null == recommendedList
+          ? _value.recommendedList
+          : recommendedList // ignore: cast_nullable_to_non_nullable
               as List<EventEntity>,
     ) as $Val);
   }
@@ -83,7 +90,8 @@ abstract class _$$HomeStateImplCopyWith<$Res>
   $Res call(
       {@JsonKey(ignore: true) AsyncSnapshot<dynamic>? asyncSnapshot,
       List<CategoryEntity> categoryList,
-      List<EventEntity> eventList});
+      List<EventEntity> eventList,
+      List<EventEntity> recommendedList});
 }
 
 /// @nodoc
@@ -100,6 +108,7 @@ class __$$HomeStateImplCopyWithImpl<$Res>
     Object? asyncSnapshot = freezed,
     Object? categoryList = null,
     Object? eventList = null,
+    Object? recommendedList = null,
   }) {
     return _then(_$HomeStateImpl(
       asyncSnapshot: freezed == asyncSnapshot
@@ -114,6 +123,10 @@ class __$$HomeStateImplCopyWithImpl<$Res>
           ? _value._eventList
           : eventList // ignore: cast_nullable_to_non_nullable
               as List<EventEntity>,
+      recommendedList: null == recommendedList
+          ? _value._recommendedList
+          : recommendedList // ignore: cast_nullable_to_non_nullable
+              as List<EventEntity>,
     ));
   }
 }
@@ -124,9 +137,11 @@ class _$HomeStateImpl implements _HomeState {
   const _$HomeStateImpl(
       {@JsonKey(ignore: true) this.asyncSnapshot,
       final List<CategoryEntity> categoryList = const [],
-      final List<EventEntity> eventList = const []})
+      final List<EventEntity> eventList = const [],
+      final List<EventEntity> recommendedList = const []})
       : _categoryList = categoryList,
-        _eventList = eventList;
+        _eventList = eventList,
+        _recommendedList = recommendedList;
 
   @override
   @JsonKey(ignore: true)
@@ -149,9 +164,18 @@ class _$HomeStateImpl implements _HomeState {
     return EqualUnmodifiableListView(_eventList);
   }
 
+  final List<EventEntity> _recommendedList;
+  @override
+  @JsonKey()
+  List<EventEntity> get recommendedList {
+    if (_recommendedList is EqualUnmodifiableListView) return _recommendedList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_recommendedList);
+  }
+
   @override
   String toString() {
-    return 'HomeState(asyncSnapshot: $asyncSnapshot, categoryList: $categoryList, eventList: $eventList)';
+    return 'HomeState(asyncSnapshot: $asyncSnapshot, categoryList: $categoryList, eventList: $eventList, recommendedList: $recommendedList)';
   }
 
   @override
@@ -164,7 +188,9 @@ class _$HomeStateImpl implements _HomeState {
             const DeepCollectionEquality()
                 .equals(other._categoryList, _categoryList) &&
             const DeepCollectionEquality()
-                .equals(other._eventList, _eventList));
+                .equals(other._eventList, _eventList) &&
+            const DeepCollectionEquality()
+                .equals(other._recommendedList, _recommendedList));
   }
 
   @override
@@ -172,7 +198,8 @@ class _$HomeStateImpl implements _HomeState {
       runtimeType,
       asyncSnapshot,
       const DeepCollectionEquality().hash(_categoryList),
-      const DeepCollectionEquality().hash(_eventList));
+      const DeepCollectionEquality().hash(_eventList),
+      const DeepCollectionEquality().hash(_recommendedList));
 
   @JsonKey(ignore: true)
   @override
@@ -185,7 +212,8 @@ abstract class _HomeState implements HomeState {
   const factory _HomeState(
       {@JsonKey(ignore: true) final AsyncSnapshot<dynamic>? asyncSnapshot,
       final List<CategoryEntity> categoryList,
-      final List<EventEntity> eventList}) = _$HomeStateImpl;
+      final List<EventEntity> eventList,
+      final List<EventEntity> recommendedList}) = _$HomeStateImpl;
 
   @override
   @JsonKey(ignore: true)
@@ -194,6 +222,8 @@ abstract class _HomeState implements HomeState {
   List<CategoryEntity> get categoryList;
   @override
   List<EventEntity> get eventList;
+  @override
+  List<EventEntity> get recommendedList;
   @override
   @JsonKey(ignore: true)
   _$$HomeStateImplCopyWith<_$HomeStateImpl> get copyWith =>

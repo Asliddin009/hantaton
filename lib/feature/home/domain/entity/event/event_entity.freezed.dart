@@ -24,7 +24,7 @@ mixin _$EventEntity {
   int? get placeId => throw _privateConstructorUsedError;
   int? get categoryId => throw _privateConstructorUsedError;
   int? get minimumAge => throw _privateConstructorUsedError;
-  int? get price => throw _privateConstructorUsedError;
+  String? get price => throw _privateConstructorUsedError;
   int? get organizatorId => throw _privateConstructorUsedError;
   String? get photo => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
@@ -48,7 +48,7 @@ abstract class $EventEntityCopyWith<$Res> {
       int? placeId,
       int? categoryId,
       int? minimumAge,
-      int? price,
+      String? price,
       int? organizatorId,
       String? photo,
       String name,
@@ -100,7 +100,7 @@ class _$EventEntityCopyWithImpl<$Res, $Val extends EventEntity>
       price: freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       organizatorId: freezed == organizatorId
           ? _value.organizatorId
           : organizatorId // ignore: cast_nullable_to_non_nullable
@@ -138,7 +138,7 @@ abstract class _$$EventEntityImplCopyWith<$Res>
       int? placeId,
       int? categoryId,
       int? minimumAge,
-      int? price,
+      String? price,
       int? organizatorId,
       String? photo,
       String name,
@@ -188,7 +188,7 @@ class __$$EventEntityImplCopyWithImpl<$Res>
       price: freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       organizatorId: freezed == organizatorId
           ? _value.organizatorId
           : organizatorId // ignore: cast_nullable_to_non_nullable
@@ -240,7 +240,7 @@ class _$EventEntityImpl implements _EventEntity {
   @override
   final int? minimumAge;
   @override
-  final int? price;
+  final String? price;
   @override
   final int? organizatorId;
   @override
@@ -306,7 +306,7 @@ abstract class _EventEntity implements EventEntity {
       final int? placeId,
       final int? categoryId,
       final int? minimumAge,
-      final int? price,
+      final String? price,
       final int? organizatorId,
       final String? photo,
       final String name,
@@ -325,7 +325,7 @@ abstract class _EventEntity implements EventEntity {
   @override
   int? get minimumAge;
   @override
-  int? get price;
+  String? get price;
   @override
   int? get organizatorId;
   @override

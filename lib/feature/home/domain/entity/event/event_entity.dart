@@ -12,7 +12,7 @@ class EventEntity with _$EventEntity {
     int? placeId,
     int? categoryId,
     int? minimumAge,
-    int? price,
+    String? price,
     int? organizatorId,
     String? photo,
     @Default('') String name,

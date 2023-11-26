@@ -179,67 +179,16 @@ class _HomeScreenState extends State<HomeScreen> {
                             width: double.infinity,
                             child: ListView.separated(
                               scrollDirection: Axis.horizontal,
-                              itemCount: state.eventList.length,
+                              itemCount: state.recommendedList.length,
                               separatorBuilder:
                                   (BuildContext context, int index) =>
                               const SizedBox(
                                 width: 16,
                               ),
                               itemBuilder: (BuildContext context, int index) {
-                                return Container(
-                                  padding: const EdgeInsets.only(bottom: 10),
-                                  decoration: const BoxDecoration(
-                                    image: DecorationImage(image: AssetImage('assets/background_tile.png')),
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(15)),
-                                  ),
-                                  width: 300,
-                                  height: 100,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                    CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Opacity(
-                                        opacity:0.7,
-                                        child: Container(
-                                          height: 100,
-                                          width: 280,
-                                          decoration: const BoxDecoration(
-                                            color: Colors.black54,
-                                            borderRadius:
-                                            BorderRadius.all(Radius.circular(15)),
-                                          ),
-                                          child: Container(
-                                            padding: const EdgeInsets.all(15),
-                                            child: Column(
-                                              children: [
-                                                Text(
-                                                  state.eventList[index].name,
-                                                  style: Theme.of(context).textTheme.displayMedium!.copyWith(color: Colors.white,fontWeight: FontWeight.bold),
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                  children: [
-                                                    Text(
-                                                      state.eventList[index]?.price==null?"Бесплатно":state.eventList[index]?.price.toString()??" ",
-                                                      style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Colors.white,fontWeight: FontWeight.bold),
-                                                    ),
-                                                    Text(
-                                                      state.eventList[index].dateStart==null?"27 декабря":state.eventList[index].dateStart.toString()??" ",
-                                                      style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Colors.white,fontWeight: FontWeight.bold),
-                                                    ),
-                                                  ],
-                                                )
-                                              ],
-                                            )
-                                            ,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                );
+                                return ContainerTile(entity: state.recommendedList[index], onTap: () {
+                                  showBottomSheet(context: context, builder: (context)=>AppBottomSheet(context: context, eventEntity:state.recommendedList[index]));
+                                },);
                               },
                             ),
                           ),

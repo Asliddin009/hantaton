@@ -46,4 +46,5 @@ abstract class AppApi {
   Future<dynamic> deleteEvent(String id);
 
   Future<dynamic> createEvent(Map<String,dynamic> name);
+  Future<dynamic> getRecommendation();
 }

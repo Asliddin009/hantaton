@@ -4,6 +4,8 @@ import 'package:hantaton_app/feature/auth/domain/auth_state/auth_cubit.dart';
 import 'package:dio/dio.dart';
 
 class AuthInterceptor extends QueuedInterceptor {
+
+  //вставляет jwt токен в запрос
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     final accessToken = locator.get<AuthCubit>().state.whenOrNull(
@@ -18,6 +20,7 @@ class AuthInterceptor extends QueuedInterceptor {
     }
   }
 
+  //Обновляет токен если он устрарел
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) async {
     if (err.response?.statusCode == 401) {

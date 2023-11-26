@@ -21,28 +21,37 @@ class HomeCubit extends Cubit<HomeState> {
 
   MockHomeRepo mockHomeRepo=MockHomeRepo();
   Future<void> init() async {
-
+  try{
     emit(state.copyWith(
         categoryList: mockHomeRepo.fetchCategories(),
         eventList: mockHomeRepo.feachEvent(),
         asyncSnapshot: const AsyncSnapshot.waiting()));
-    await Future.delayed(const Duration(seconds: 4));
-    //todo сделать запрос
+    await Future.delayed(const Duration(seconds: 2));
+    final response = await repo.getRecommendation();
+
     emit(state.copyWith(
-      asyncSnapshot: const AsyncSnapshot.withData(ConnectionState.done, null)
+      recommendedList: response,
+        asyncSnapshot: const AsyncSnapshot.withData(ConnectionState.done, null)
     ));
-    //final response = await repo.fetchCategories();
-    //final Iterable iterable1 = response;
+  }catch(error){
+    emit(state.copyWith(
+        categoryList: mockHomeRepo.fetchCategories(),
+        eventList: mockHomeRepo.feachEvent(),
+        asyncSnapshot: const AsyncSnapshot.withData(ConnectionState.done, null)));
+  }
+
   }
 
 
-// Future<void> createPost(PostEvent event, Emitter emitter) async {
-//   await repo.createPost((event as _PostEventCreate).args).then((value) {
-//     this.add(PostEvent.fetch());
-//   }).catchError((error) {
-//     stateError(error, emitter);
-//   });
-// }
+Future<void> createEvent(Map<String,Object> data) async {
+  try{
+    await repo.createEvent(data);
+  }catch(error){
+
+  }
+
+  }
+
 
 void logOut() {
   emit(const HomeState());

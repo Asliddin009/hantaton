@@ -5,7 +5,6 @@ import 'package:hantaton_app/feature/auth/ui/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../app/ui/components/app_text_button.dart';
 import '../../../app/ui/components/app_text_field.dart';
 
 class LoginScreen extends StatelessWidget {

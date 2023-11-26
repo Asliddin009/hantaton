@@ -6,6 +6,7 @@ class HomeState with _$HomeState {
     @JsonKey(ignore: true) AsyncSnapshot? asyncSnapshot,
     @Default([]) List<CategoryEntity> categoryList,
     @Default([]) List<EventEntity> eventList,
+    @Default([]) List<EventEntity> recommendedList,
 
   }) = _HomeState;
 }
