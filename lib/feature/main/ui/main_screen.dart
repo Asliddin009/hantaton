@@ -6,6 +6,7 @@ import 'package:hantaton_app/feature/home/ui/home_screen.dart';
 import 'package:hantaton_app/feature/main/ui/search_screen.dart';
 
 
+import '../../auth/ui/like_category.dart';
 import 'chat_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -53,7 +54,7 @@ class _MainScreenState extends State<MainScreen> {
       case 0:
         return const HomeScreen();
       case 1:
-        return  SearchScreen();
+        return  LikeCategory();
       case 2:
         return const ChatScreen();
       case 3:
